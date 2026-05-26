@@ -8,6 +8,13 @@
       "when": 1779172205255,
       "tag": "0000_create_auth",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1779728994528,
+      "tag": "0001_create_article",
+      "breakpoints": true
     }
   ]
 }
