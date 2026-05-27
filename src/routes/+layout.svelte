@@ -29,5 +29,5 @@
 </svelte:head>
 
 <ModeWatcher />
-<Toaster position="top-center" />
+<Toaster position="top-center" richColors />
 {@render children()}
