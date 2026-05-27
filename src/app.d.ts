@@ -21,6 +21,10 @@ declare global {
 
 		// interface Error {}
 		interface PageData {
+			flash?: {
+				type?: 'default' | 'info' | 'success' | 'warning' | 'error';
+				message: string;
+			};
 			hasSession: boolean;
 			articles?: Array<
 				Pick<Article, 'id' | 'slug' | 'priority' | 'parentId' | 'status' | 'createdAt'> &
