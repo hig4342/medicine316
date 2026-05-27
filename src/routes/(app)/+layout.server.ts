@@ -1,34 +1,29 @@
 import type { LayoutServerLoad } from './$types';
-import { redirect } from '@sveltejs/kit';
-import { article, articleI18n } from '$lib/server/db/schema';
 import { and, eq } from 'drizzle-orm';
 import { getDb } from '$lib/server/db';
+import { article, articleI18n } from '$lib/server/db/schema';
+import { getLocale } from '$lib/paraglide/runtime';
 
-export const load: LayoutServerLoad = async ({ locals, url, platform }) => {
-	const { session } = locals;
-
-	if (!session && url.pathname !== '/admin/sign-in') {
-		throw redirect(302, '/admin/sign-in');
-	}
-
-	if (session && url.pathname === '/admin/sign-in') {
-		throw redirect(302, '/admin');
-	}
-
+export const load: LayoutServerLoad = async ({ locals, platform }) => {
 	if (!platform) {
 		return {
 			hasSession: false,
 			articles: []
 		};
 	}
+
+	const { session } = locals;
+
+	const currentLocale = getLocale();
 	const db = getDb(platform.env.DB);
 
 	const rows = await db
 		.select()
 		.from(article)
+		.where(eq(article.status, 'published'))
 		.innerJoin(
 			articleI18n,
-			and(eq(articleI18n.articleId, article.id), eq(articleI18n.language, 'ko'))
+			and(eq(articleI18n.articleId, article.id), eq(articleI18n.language, currentLocale))
 		);
 	const articles = rows.map(({ article, article_i18n: i18n }) => ({
 		id: article.id,
