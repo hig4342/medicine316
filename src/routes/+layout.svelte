@@ -1,6 +1,7 @@
 <script lang="ts">
 	import './layout.css';
 	import { ModeWatcher } from 'mode-watcher';
+	import { Toaster } from '$lib/components/ui/sonner';
 	import favicon from '$lib/assets/favicon.svg';
 
 	let { children } = $props();
@@ -11,4 +12,5 @@
 </svelte:head>
 
 <ModeWatcher />
+<Toaster position="top-center" />
 {@render children()}
