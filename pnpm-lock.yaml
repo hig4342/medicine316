@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@horuse/svelte-dnd':
+        specifier: ^1.0.0
+        version: 1.0.0(svelte@5.55.7(@typescript-eslint/types@8.59.3))
     devDependencies:
       '@better-auth/cli':
         specifier: ~1.4.21
@@ -1096,6 +1100,11 @@ packages:
 
   '@hapi/topo@5.1.0':
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
+
+  '@horuse/svelte-dnd@1.0.0':
+    resolution: {integrity: sha512-j28Jmu6IyaucpBiwEEnuEwbDcn8IJ8UnM/wDP0wWg4QIsqGdojxBf4BQlzJoRinJVRVcggzdHJbu5Koyua/uQQ==}
+    peerDependencies:
+      svelte: ^5.0.0
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -4298,6 +4307,10 @@ snapshots:
     dependencies:
       '@hapi/hoek': 9.3.0
     optional: true
+
+  '@horuse/svelte-dnd@1.0.0(svelte@5.55.7(@typescript-eslint/types@8.59.3))':
+    dependencies:
+      svelte: 5.55.7(@typescript-eslint/types@8.59.3)
 
   '@humanfs/core@0.19.2':
     dependencies:
