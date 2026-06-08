@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { untrack } from 'svelte';
+	import { onMount, untrack } from 'svelte';
+	import type { Readable } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
 	import { valibotClient } from 'sveltekit-superforms/adapters';
 	import {
@@ -12,6 +13,15 @@
 	import { toast } from 'svelte-sonner';
 	import { locales } from '$lib/paraglide/runtime';
 	import { formSchema, type FAQ } from './schema';
+	import { Content, createEditor, Editor } from '$lib/components/tiptap';
+	import {
+		CharacterCount,
+		Placeholder,
+		StarterKit,
+		TaskItem,
+		TaskList,
+		TextAlign
+	} from '$lib/components/tiptap/extensions';
 
 	import { Button } from '$lib/components/ui/button';
 	import { Spinner } from '$lib/components/ui/spinner';
@@ -32,6 +42,7 @@
 	let saveLoading = $state(false);
 	let deleteLoading = $state(false);
 
+	let editor = $state<Readable<Editor>>();
 	const controller = new DndController();
 
 	controller.onDrop(async ({ item: { id }, target: { position } }) => {
@@ -59,6 +70,7 @@
 	const { form, errors, enhance, constraints } = superForm(
 		untrack(() => data.form),
 		{
+			dataType: 'json',
 			validators: valibotClient(formSchema),
 			onSubmit: ({ action }) => {
 				disabled = true;
@@ -101,6 +113,7 @@
 
 					event.set('question', data.question);
 					event.set('answer', data.answer);
+					$editor?.commands.setContent(data.answer);
 					toast.success('언어가 변경되었습니다.');
 					disabled = false;
 				}
@@ -115,6 +128,7 @@
 			question: faq.question,
 			answer: faq.answer
 		});
+		$editor?.commands.setContent(faq.answer);
 	}
 
 	async function createFaq(event: MouseEvent) {
@@ -129,6 +143,29 @@
 		selectFaq(newFaq);
 		toast.success('새 FAQ가 생성되었습니다.');
 	}
+
+	onMount(() => {
+		editor = createEditor({
+			extensions: [
+				StarterKit,
+				CharacterCount,
+				Placeholder.configure({
+					placeholder: '게시글 본문을 입력하세요...'
+				}),
+				TaskList,
+				TaskItem,
+				TextAlign.configure({
+					types: ['heading', 'paragraph']
+				})
+			],
+			onUpdate: ({ editor }) => {
+				form.set({
+					...$form,
+					answer: editor.getJSON()
+				});
+			}
+		});
+	});
 </script>
 
 <div class="flex h-full flex-row">
@@ -160,7 +197,7 @@
 			</DndDroppable>
 		</DndProvider>
 	</div>
-	<form method="POST" action="?/save" class="flex-1 space-y-4 p-2" use:enhance>
+	<form method="POST" action="?/save" class="flex flex-1 flex-col gap-4 p-2" use:enhance>
 		{#if $form.id}
 			<input type="hidden" name="id" value={$form.id} />
 			<div class="space-y-2">
@@ -195,15 +232,11 @@
 					<p class="text-sm text-red-500">{$errors.question}</p>
 				{/if}
 			</div>
-			<div class="space-y-2">
+			<div class="flex flex-1 flex-col gap-2">
 				<Label for="answer">답변</Label>
-				<Textarea
-					name="answer"
-					bind:value={$form.answer}
-					placeholder="답변을 입력해주세요."
-					{...$constraints.answer}
-					{disabled}
-				/>
+				{#if $editor}
+					<Content editor={$editor} />
+				{/if}
 				{#if $errors.answer}
 					<p class="text-sm text-red-500">{$errors.answer}</p>
 				{/if}

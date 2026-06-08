@@ -3,6 +3,7 @@ import { sqliteTable, text, integer, primaryKey, index, real } from 'drizzle-orm
 import { createSelectSchema, createInsertSchema } from 'drizzle-valibot';
 import * as v from 'valibot';
 import { locales } from '$lib/paraglide/runtime';
+import type { JSONContent } from '@tiptap/core';
 
 export const faq = sqliteTable('faq', {
 	id: text('id').primaryKey(),
@@ -24,7 +25,7 @@ export const faqI18n = sqliteTable(
 			.references(() => faq.id, { onDelete: 'cascade' }),
 		language: text('language', { enum: locales }).notNull().default('ko'),
 		question: text('question').notNull().default(''),
-		answer: text('answer').notNull().default('')
+		answer: text('content', { mode: 'json' }).$type<JSONContent>()
 	},
 	(table) => [
 		primaryKey({ columns: [table.faqId, table.language] }),

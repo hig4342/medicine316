@@ -11,6 +11,7 @@ import {
 import { createSelectSchema, createInsertSchema } from 'drizzle-valibot';
 import * as v from 'valibot';
 import { locales } from '$lib/paraglide/runtime';
+import type { JSONContent } from '@tiptap/core';
 
 export const article = sqliteTable(
 	'article',
@@ -46,10 +47,7 @@ export const articleI18n = sqliteTable(
 		language: text('language', { enum: locales }).default('ko').notNull(),
 		title: text('title').notNull(),
 		summary: text('summary').default('').notNull(),
-		content: text('content', { mode: 'json' })
-			.default('{}')
-			.notNull()
-			.$type<Record<string, unknown>>()
+		content: text('content', { mode: 'json' }).$type<JSONContent>()
 	},
 	(table) => [
 		primaryKey({ columns: [table.articleId, table.language] }),
@@ -62,7 +60,7 @@ export const articleRelations = relations(article, ({ one, many }) => ({
 		fields: [article.parentId],
 		references: [article.id]
 	}),
-	i18n: many(articleI18n),
+	i18n: many(articleI18n, { relationName: 'article_i18n' }),
 	children: many(article)
 }));
 

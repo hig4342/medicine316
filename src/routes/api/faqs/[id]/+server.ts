@@ -40,8 +40,7 @@ export const GET = async ({ platform, params, url }) => {
 			.values({
 				faqId: id,
 				language,
-				question: '',
-				answer: ''
+				question: ''
 			})
 			.onConflictDoNothing()
 			.returning()
@@ -51,7 +50,7 @@ export const GET = async ({ platform, params, url }) => {
 			...result,
 			language,
 			question: newI18nEntry?.question || '',
-			answer: newI18nEntry?.answer || ''
+			answer: newI18nEntry?.answer
 		});
 	}
 
@@ -59,6 +58,6 @@ export const GET = async ({ platform, params, url }) => {
 		...result,
 		language,
 		question: i18nResult?.question || '',
-		answer: i18nResult?.answer || ''
+		answer: i18nResult?.answer
 	});
 };

@@ -5,7 +5,7 @@
 	import MoonIcon from '@lucide/svelte/icons/moon';
 </script>
 
-<Button onclick={toggleMode} variant="outline" size="icon">
+<Button onclick={toggleMode} variant="outline" size="icon" class="cursor-pointer">
 	<SunIcon class="scale-100 rotate-0 transition-all! dark:scale-0 dark:-rotate-90" />
 	<MoonIcon class="absolute scale-0 rotate-90 transition-all! dark:scale-100 dark:rotate-0" />
 	<span class="sr-only">Switch theme</span>

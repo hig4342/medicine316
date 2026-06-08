@@ -17,7 +17,7 @@ CREATE TABLE `article_i18n` (
 	`language` text DEFAULT 'ko' NOT NULL,
 	`title` text NOT NULL,
 	`summary` text DEFAULT '' NOT NULL,
-	`content` text DEFAULT '{}' NOT NULL,
+	`content` text,
 	PRIMARY KEY(`article_id`, `language`),
 	FOREIGN KEY (`article_id`) REFERENCES `article`(`id`) ON UPDATE no action ON DELETE cascade
 );

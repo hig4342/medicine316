@@ -9,7 +9,7 @@ CREATE TABLE `faq_i18n` (
 	`faq_id` text NOT NULL,
 	`language` text DEFAULT 'ko' NOT NULL,
 	`question` text DEFAULT '' NOT NULL,
-	`answer` text DEFAULT '' NOT NULL,
+	`content` text,
 	PRIMARY KEY(`faq_id`, `language`),
 	FOREIGN KEY (`faq_id`) REFERENCES `faq`(`id`) ON UPDATE no action ON DELETE cascade
 );

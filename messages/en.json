@@ -1,3 +1,52 @@
 {
-	"$schema": "https://inlang.com/schema/inlang-message-format"
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"articles": {
+		"onThisPage": "On this page",
+		"lastUpdated": "Last updated on {updatedAt}"
+	},
+	"faq": {
+		"heading": "Frequently Asked Questions",
+		"subheading": "Find answers to common questions about our product and services."
+	},
+	"404": {
+		"heading": "Page Not Found",
+		"subheading": "Sorry, the page you are looking for does not exist.",
+		"backToHome": "Back to Home"
+	},
+	"search": {
+		"placeholder": "Search Docs...",
+		"noResults": "No results found.",
+		"articles": "Articles"
+	},
+	"editor": {
+		"headingPlaceholder": "What's the title?",
+		"paragraphPlaceholder": "Write, type '/' for commands..."
+	},
+	"toolbar": {
+		"formats": "Formats",
+		"alignments": "Alignments",
+		"groups": {
+			"default": "Default Blocks",
+			"list": "List",
+			"alignments": "Alignments"
+		}
+	},
+	"extensions": {
+		"table": {
+			"selectRow": "Select Row",
+			"addRow": "Add Row",
+			"addRowAfter": "Add Row After",
+			"addColumn": "Add Column",
+			"addColumnAfter": "Add Column After",
+			"selectColumn": "Select Column"
+		},
+		"copyPage": {
+			"label": "Copy Page",
+			"copyHtmlSuccess": "HTML copied to clipboard!",
+			"copyMarkdownSuccess": "Markdown copied to clipboard!"
+		},
+		"referArticle": {
+			"show": "Show Article"
+		}
+	}
 }

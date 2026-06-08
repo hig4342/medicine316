@@ -1,6 +1,6 @@
 import type { User, Session } from 'better-auth';
+import type { LocalizedArticle } from '$lib/types';
 import { createAuth } from '$lib/server/auth';
-import { type Article, type ArticleI18n } from '$lib/server/db/schema';
 
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
@@ -25,11 +25,7 @@ declare global {
 				type?: 'default' | 'info' | 'success' | 'warning' | 'error';
 				message: string;
 			};
-			hasSession: boolean;
-			articles?: Array<
-				Pick<Article, 'id' | 'slug' | 'priority' | 'parentId' | 'status' | 'createdAt'> &
-					Pick<ArticleI18n, 'title'>
-			>;
+			articles: LocalizedArticle[];
 		}
 		// interface PageState {}
 	}

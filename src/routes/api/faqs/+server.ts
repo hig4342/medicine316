@@ -22,8 +22,7 @@ export const POST = async ({ platform }) => {
 	const newKoreanFaq: FaqI18nInsertSchema = {
 		faqId: newFaq.id,
 		language: 'ko',
-		question: '새 질문',
-		answer: '새 답변'
+		question: '새 질문'
 	};
 
 	try {

@@ -1,10 +1,7 @@
 import type { LayoutServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
-import { article, articleI18n } from '$lib/server/db/schema';
-import { and, eq } from 'drizzle-orm';
-import { getDb } from '$lib/server/db';
 
-export const load: LayoutServerLoad = async ({ locals, url, platform }) => {
+export const load: LayoutServerLoad = async ({ locals, url }) => {
 	const { session } = locals;
 
 	if (!session && url.pathname !== '/admin/sign-in') {
@@ -14,34 +11,4 @@ export const load: LayoutServerLoad = async ({ locals, url, platform }) => {
 	if (session && url.pathname === '/admin/sign-in') {
 		throw redirect(302, '/admin');
 	}
-
-	if (!platform) {
-		return {
-			hasSession: false,
-			articles: []
-		};
-	}
-	const db = getDb(platform.env.DB);
-
-	const rows = await db
-		.select()
-		.from(article)
-		.innerJoin(
-			articleI18n,
-			and(eq(articleI18n.articleId, article.id), eq(articleI18n.language, 'ko'))
-		);
-	const articles = rows.map(({ article, article_i18n: i18n }) => ({
-		id: article.id,
-		slug: article.slug,
-		priority: article.priority,
-		parentId: article.parentId,
-		status: article.status,
-		createdAt: article.createdAt,
-		title: i18n.title
-	}));
-
-	return {
-		hasSession: !!session,
-		articles
-	};
 };

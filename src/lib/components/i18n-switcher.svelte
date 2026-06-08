@@ -6,7 +6,9 @@
 </script>
 
 <DropdownMenu.Root>
-	<DropdownMenu.Trigger class={buttonVariants({ variant: 'outline', size: 'icon' })}>
+	<DropdownMenu.Trigger
+		class={buttonVariants({ variant: 'outline', size: 'icon', class: 'cursor-pointer' })}
+	>
 		<LanguagesIcon />
 		<span class="sr-only">Switch language</span>
 	</DropdownMenu.Trigger>

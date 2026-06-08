@@ -49,8 +49,11 @@ export const actions = {
 		const form = await superValidate(request, valibot(formSchema));
 
 		if (!form.valid) {
+			console.error('Form validation failed:', form.errors);
 			return fail(400, { form });
 		}
+
+		console.log('Form data:', form.data);
 
 		const { id, language, question, answer } = form.data;
 

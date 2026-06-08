@@ -1,8 +1,18 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+	import type { LocalizedArticle } from '$lib/types';
 	import { cmdOrCtrl } from '$lib/hooks/is-mac.svelte';
 	import * as Command from '$lib/components/ui/command';
 	import { Button } from '$lib/components/ui/button';
 	import * as Kbd from '$lib/components/ui/kbd';
+	import { m } from '$lib/paraglide/messages';
+
+	interface Props {
+		articles: LocalizedArticle[];
+		onclick?: () => void;
+	}
+
+	let { articles, onclick }: Props = $props();
 
 	let open = $state(false);
 
@@ -21,7 +31,7 @@
 	class="flex w-full cursor-pointer justify-between text-muted-foreground"
 	onclick={() => (open = true)}
 >
-	<span>Search...</span>
+	<span>{m['search.placeholder']()}</span>
 	<Kbd.Group>
 		<Kbd.Root>{cmdOrCtrl}</Kbd.Root>
 		+
@@ -30,19 +40,22 @@
 </Button>
 
 <Command.Dialog bind:open>
-	<Command.Input placeholder="Search..." />
+	<Command.Input placeholder={m['search.placeholder']()} />
 	<Command.List>
-		<Command.Empty>No results found.</Command.Empty>
-		<Command.Group>
-			<Command.Item>
-				<span>Calendar</span>
-			</Command.Item>
-			<Command.Item>
-				<span>Search Emoji</span>
-			</Command.Item>
-			<Command.Item>
-				<span>Calculator</span>
-			</Command.Item>
+		<Command.Empty>{m['search.noResults']()}</Command.Empty>
+		<Command.Group heading={m['search.articles']()}>
+			{#each articles as article (article.id)}
+				<Command.LinkItem
+					class="cursor-pointer"
+					href={resolve('/(app)/[...slug]', { slug: article.slug })}
+					onclick={() => {
+						open = false;
+						onclick?.();
+					}}
+				>
+					<span>{article.title}</span>
+				</Command.LinkItem>
+			{/each}
 		</Command.Group>
 	</Command.List>
 </Command.Dialog>

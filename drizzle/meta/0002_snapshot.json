@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "6c3cf247-0ca0-4c90-8220-ed4af6b371a7",
-  "prevId": "27f73b9b-4c6a-4e03-8875-ec19a32e38cc",
+  "id": "70d47923-5b4c-41bb-b61b-ee474e0cc780",
+  "prevId": "5fa10901-9a6a-4e2a-b809-c5494277210d",
   "tables": {
     "account": {
       "name": "account",
@@ -514,9 +514,8 @@
           "name": "content",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "'{}'"
+          "notNull": false,
+          "autoincrement": false
         }
       },
       "indexes": {
@@ -622,13 +621,12 @@
           "autoincrement": false,
           "default": "''"
         },
-        "answer": {
-          "name": "answer",
+        "content": {
+          "name": "content",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "''"
+          "notNull": false,
+          "autoincrement": false
         }
       },
       "indexes": {
