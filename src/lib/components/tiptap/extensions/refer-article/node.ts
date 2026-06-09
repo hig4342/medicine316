@@ -38,6 +38,10 @@ export const ReferArticle = Node.create<ReferArticleOptions>({
 		return ['refer-article-component', mergeAttributes(HTMLAttributes)];
 	},
 
+	renderText() {
+		return '';
+	},
+
 	addNodeView() {
 		return SvelteNodeViewRenderer(ReferArticleComponent);
 	}

@@ -171,6 +171,9 @@ importers:
       gsap:
         specifier: ^3.15.0
         version: 3.15.0
+      hangul-search:
+        specifier: ^1.4.5
+        version: 1.4.5
       mode-watcher:
         specifier: ^1.1.0
         version: 1.1.0(svelte@5.55.7(@typescript-eslint/types@8.59.3))
@@ -2919,6 +2922,10 @@ packages:
 
   gsap@3.15.0:
     resolution: {integrity: sha512-dMW4CWBTUK1AEEDeZc1g4xpPGIrSf9fJF960qbTZmN/QwZIWY5wgliS6JWl9/25fpTGJrMRtSjGtOmPnfjZB+A==}
+
+  hangul-search@1.4.5:
+    resolution: {integrity: sha512-sCsTgOzRkzqS8Md+mh2cX8vqGSCjKCDoGY6VQ6CZWGVH7T6jSNBvsTydk8Eg4rVBwDJDBw+MyczuT6nXtt7m2A==}
+    engines: {node: '>=18.15.0'}
 
   hast-util-to-html@9.0.5:
     resolution: {integrity: sha512-OguPdidb+fbHQSU4Q4ZiLKnzWo8Wwsf5bZfbvu7//a9oTYoqD/fWpe96NuHkoS9h0ccGOTe0C4NGXdtS0iObOw==}
@@ -6363,6 +6370,8 @@ snapshots:
   graceful-fs@4.2.11: {}
 
   gsap@3.15.0: {}
+
+  hangul-search@1.4.5: {}
 
   hast-util-to-html@9.0.5:
     dependencies:

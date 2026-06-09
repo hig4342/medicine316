@@ -121,7 +121,13 @@
 				<div>
 					<p>
 						{m['articles.lastUpdated']({
-							updatedAt: article.updatedAt.toTemporalInstant().toLocaleString(locale)
+							updatedAt: article.updatedAt
+								.toTemporalInstant()
+								.toZonedDateTimeISO('Asia/Seoul')
+								.toLocaleString(Intl.DateTimeFormat().resolvedOptions().locale, {
+									dateStyle: 'long',
+									timeStyle: 'short'
+								})
 						})}
 					</p>
 				</div>

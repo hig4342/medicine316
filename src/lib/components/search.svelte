@@ -6,6 +6,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import * as Kbd from '$lib/components/ui/kbd';
 	import { m } from '$lib/paraglide/messages';
+	import MatchedContent from './matched-content.svelte';
 
 	interface Props {
 		articles: LocalizedArticle[];
@@ -14,6 +15,7 @@
 
 	let { articles, onclick }: Props = $props();
 
+	let value = $state<string>('');
 	let open = $state(false);
 
 	function handleKeydown(e: KeyboardEvent) {
@@ -40,20 +42,26 @@
 </Button>
 
 <Command.Dialog bind:open>
-	<Command.Input placeholder={m['search.placeholder']()} />
+	<Command.Input bind:value placeholder={m['search.placeholder']()} />
 	<Command.List>
-		<Command.Empty>{m['search.noResults']()}</Command.Empty>
+		<Command.Empty>
+			{#if value}
+				{m['search.noResults']()}
+			{:else}
+				{m['search.emptyQuery']()}
+			{/if}
+		</Command.Empty>
 		<Command.Group heading={m['search.articles']()}>
 			{#each articles as article (article.id)}
 				<Command.LinkItem
-					class="cursor-pointer"
+					class="flex cursor-pointer flex-col items-start gap-1"
 					href={resolve('/(app)/[...slug]', { slug: article.slug })}
 					onclick={() => {
 						open = false;
 						onclick?.();
 					}}
 				>
-					<span>{article.title}</span>
+					<MatchedContent {article} query={value} />
 				</Command.LinkItem>
 			{/each}
 		</Command.Group>

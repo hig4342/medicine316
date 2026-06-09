@@ -1,7 +1,7 @@
 {
 	"name": "medicine316",
 	"private": true,
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
@@ -45,6 +45,7 @@
 		"eslint-plugin-svelte": "^3.17.0",
 		"globals": "^17.4.0",
 		"gsap": "^3.15.0",
+		"hangul-search": "^1.4.5",
 		"mode-watcher": "^1.1.0",
 		"prettier": "^3.8.1",
 		"prettier-plugin-svelte": "^3.5.1",

@@ -16,6 +16,7 @@
 	"search": {
 		"placeholder": "문서 검색...",
 		"noResults": "결과를 찾을 수 없습니다.",
+		"emptyQuery": "검색어를 입력해주세요.",
 		"articles": "문서"
 	},
 	"editor": {

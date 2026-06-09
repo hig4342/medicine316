@@ -16,6 +16,7 @@
 	"search": {
 		"placeholder": "Search Docs...",
 		"noResults": "No results found.",
+		"emptyQuery": "Please enter a search query.",
 		"articles": "Articles"
 	},
 	"editor": {

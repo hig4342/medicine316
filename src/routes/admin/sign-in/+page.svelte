@@ -45,7 +45,7 @@
 				</div>
 			</Card.Content>
 			<Card.Footer class="flex-col gap-2">
-				<Button type="submit" class="w-full">로그인</Button>
+				<Button type="submit" class="w-full cursor-pointer">로그인</Button>
 			</Card.Footer>
 		</Card.Root>
 	</form>
